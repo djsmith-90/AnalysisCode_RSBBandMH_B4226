@@ -1417,6 +1417,13 @@ mum_results_rsbb$p_adj[mum_results_rsbb$model == "3a" & mum_results_rsbb$level =
                          summary(mod_3a_adj)$standard.errors["MIN 1 a WK", "dep_age2"]), 0, 1)) * 2, 4)
 
 
+## As is quite a large association here - with higher depression scores associated with lower rates of attending at least once a year, relative to not at all - will calculate the E-value/level of unmeasured confounding necessary to make this result null, using approximate conversions from odds ratios (or relative risk ratios, in this case) to risk ratios - As rates of attendance at least once a year relatively common, will use the 'rare = FALSE' option (see ?evalues.OR).
+
+evalues.OR(est = 0.845, lo = 0.760, hi = 0.939, true = 1, rare = FALSE)
+
+# E-value to null is 1.40, meaning that an unmeasured confounder which increases the risk of both the exposure and outcome by ~40% is necessary to completely remove the observed association - For the upper CI to cross the null, requires approx. 20% increase in risk, which may not be a huge amount of unmeasured/residual confounding necessary to overturn result.
+
+
 ## Probability of difference in RSBB outcome
 (prob <- avg_comparisons(mod_3a_adj, variable = "dep_age2"))
 (prob_z <- avg_comparisons(mod_3a_adj_z, variable = "dep_age2_z"))
@@ -1700,6 +1707,13 @@ mum_results_rsbb$uci_adj_z[mum_results_rsbb$model == "3b" & mum_results_rsbb$lev
 mum_results_rsbb$p_adj[mum_results_rsbb$model == "3b" & mum_results_rsbb$level == "1/wk"] <- 
   round((1 - pnorm(abs(summary(mod_3b_adj)$coefficients["MIN 1 a WK", "anx_age2"]/
                          summary(mod_3b_adj)$standard.errors["MIN 1 a WK", "anx_age2"]), 0, 1)) * 2, 4)
+
+
+## As is an association here - with higher anxiety scores associated with lower rates of attending at least once a year, relative to not at all - will calculate the E-value/level of unmeasured confounding necessary to make this result null, using approximate conversions from odds ratios (or relative risk ratios, in this case) to risk ratios - As rates of attendance at least once a year relatively common, will use the 'rare = FALSE' option (see ?evalues.OR).
+
+evalues.OR(est = 0.890, lo = 0.801, hi = 0.990, true = 1, rare = FALSE)
+
+# E-value to null is 1.31, meaning that an unmeasured confounder which increases the risk of both the exposure and outcome by ~30% is necessary to completely remove the observed association - For the upper CI to cross the null, requires approx. 8% increase in risk, which is not a huge amount of unmeasured/residual confounding necessary to overturn result.
 
 
 ## Probability of difference in RSBB outcome
@@ -2354,6 +2368,13 @@ mum_results_rsbb$uci_adj[mum_results_rsbb$model == "6a" & mum_results_rsbb$level
 mum_results_rsbb$p_adj[mum_results_rsbb$model == "6a" & mum_results_rsbb$level == "1/wk"] <- 
   round((1 - pnorm(abs(summary(mod_6a_adj)$coefficients["MIN 1 a WK", "dep_age2_binDep"]/
                          summary(mod_6a_adj)$standard.errors["MIN 1 a WK", "dep_age2_binDep"]), 0, 1)) * 2, 4)
+
+
+## As is quite a large association here - with probable depression associated with slightly lower rates of attending at least once a year, relative to not at all - will calculate the E-value/level of unmeasured confounding necessary to make this result null, using approximate conversions from odds ratios (or relative risk ratios, in this case) to risk ratios - As rates of attendance at least once a year relatively common, will use the 'rare = FALSE' option (see ?evalues.OR).
+
+evalues.OR(est = 0.564, lo = 0.394, hi = 0.810, true = 1, rare = FALSE)
+
+# E-value to null is 2.00, meaning that an unmeasured confounder which doubles the risk of both the exposure and outcome is necessary to completely remove the observed association - For the upper CI to cross the null, requires approx. 50% increase in risk, which is a rather substantial amount of unmeasured/residual confounding necessary to overturn result.
 
 
 ## Probability of difference in RSBB outcome

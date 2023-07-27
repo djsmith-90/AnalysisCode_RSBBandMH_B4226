@@ -1417,6 +1417,13 @@ partner_results_rsbb$p_adj[partner_results_rsbb$model == "3a" & partner_results_
                          summary(mod_3a_adj)$standard.errors["MIN 1 a WK", "dep_age2"]), 0, 1)) * 2, 4)
 
 
+## As is an association here - with higher anxiety scores associated with lower rates of attending at least once a year, relative to not at all - will calculate the E-value/level of unmeasured confounding necessary to make this result null, using approximate conversions from odds ratios (or relative risk ratios, in this case) to risk ratios - As rates of attendance at least once a year relatively common, will use the 'rare = FALSE' option (see ?evalues.OR).
+
+evalues.OR(est = 0.858, lo = 0.735, hi = 1.003, true = 1, rare = FALSE)
+
+# E-value to null is 1.37, meaning that an unmeasured confounder which increases the risk of both the exposure and outcome by ~35% is necessary to completely remove the observed association - Although the upper 95% CI already crosses the null...
+
+
 ## Probability of difference in RSBB outcome
 (prob <- avg_comparisons(mod_3a_adj, variable = "dep_age2"))
 (prob_z <- avg_comparisons(mod_3a_adj_z, variable = "dep_age2_z"))
