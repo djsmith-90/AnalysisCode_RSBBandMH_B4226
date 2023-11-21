@@ -48,6 +48,27 @@ data_mum_cca_mh_syn <- syn(data_mum_cca_mh, seed = 186805)
 replicated.uniques(data_mum_cca_mh_syn, data_mum_cca_mh)
 data_mum_cca_mh_syn <- sdc(data_mum_cca_mh_syn, data_mum_cca_mh, rm.replicated.uniques = TRUE)
 
+## Take a few unique true observations, and make sure not fully-replicated in synthetic dataset (based on the 'replicated.uniques' command from the 'synthpop' package)
+
+# Make a dataset just of unique individuals using the observed data (as if two or more participants share exactly the same data, then it's impossible to link back to a unique individual)
+sum(!(duplicated(data_mum_cca_mh) | duplicated(data_mum_cca_mh, fromLast = TRUE)))
+dat_unique <- data_mum_cca_mh[!(duplicated(data_mum_cca_mh) | duplicated(data_mum_cca_mh, fromLast = TRUE)), ]
+
+# Make a dataset just of unique individuals from the synthetic dataset
+sum(!(duplicated(data_mum_cca_mh_syn$syn) | duplicated(data_mum_cca_mh_syn$syn, fromLast = TRUE)))
+syn_unique <- data_mum_cca_mh_syn$syn[!(duplicated(data_mum_cca_mh_syn$syn) | 
+                                          duplicated(data_mum_cca_mh_syn$syn, fromLast = TRUE)), ]
+
+# Select a random row from the observed data
+(row_unique <- dat_unique[sample(nrow(dat_unique), 1), ])
+
+# Combine observed row with the synthetic data, and see if any duplicates
+sum(duplicated(rbind.data.frame(syn_unique, row_unique)))
+
+# Repeat for a few more rows of observed data
+(row_unique <- dat_unique[sample(nrow(dat_unique), 10), ])
+sum(duplicated(rbind.data.frame(syn_unique, row_unique)))
+
 # Explore this synthetic dataset
 data_mum_cca_mh_syn
 summary(data_mum_cca_mh_syn)
@@ -185,6 +206,28 @@ data_partner_cca_mh_syn <- syn(data_partner_cca_mh, seed = 61308)
 # Use the 'sdc' command (statistical disclosure control) to identify and remove any cases that are unique in both synthetic and observed data (i.e., cases which may be disclosive) - Here, are no unique replicates
 replicated.uniques(data_partner_cca_mh_syn, data_partner_cca_mh)
 data_partner_cca_mh_syn <- sdc(data_partner_cca_mh_syn, data_partner_cca_mh, rm.replicated.uniques = TRUE)
+
+## Take a few unique true observations, and make sure not fully-replicated in synthetic dataset (based on the 'replicated.uniques' command from the 'synthpop' package)
+
+# Make a dataset just of unique individuals using the observed data (as if two or more participants share exactly the same data, then it's impossible to link back to a unique individual)
+sum(!(duplicated(data_partner_cca_mh) | duplicated(data_partner_cca_mh, fromLast = TRUE)))
+dat_unique <- data_partner_cca_mh[!(duplicated(data_partner_cca_mh) | 
+                                      duplicated(data_partner_cca_mh, fromLast = TRUE)), ]
+
+# Make a dataset just of unique individuals from the synthetic dataset
+sum(!(duplicated(data_partner_cca_mh_syn$syn) | duplicated(data_partner_cca_mh_syn$syn, fromLast = TRUE)))
+syn_unique <- data_partner_cca_mh_syn$syn[!(duplicated(data_partner_cca_mh_syn$syn) | 
+                                          duplicated(data_partner_cca_mh_syn$syn, fromLast = TRUE)), ]
+
+# Select a random row from the observed data
+(row_unique <- dat_unique[sample(nrow(dat_unique), 1), ])
+
+# Combine observed row with the synthetic data, and see if any duplicates
+sum(duplicated(rbind.data.frame(syn_unique, row_unique)))
+
+# Repeat for a few more rows of observed data
+(row_unique <- dat_unique[sample(nrow(dat_unique), 10), ])
+sum(duplicated(rbind.data.frame(syn_unique, row_unique)))
 
 # Explore this synthetic dataset
 data_partner_cca_mh_syn
@@ -325,6 +368,28 @@ data_mum_cca_rsbb_syn <- syn(data_mum_cca_rsbb, seed = 249268)
 replicated.uniques(data_mum_cca_rsbb_syn, data_mum_cca_rsbb)
 data_mum_cca_rsbb_syn <- sdc(data_mum_cca_rsbb_syn, data_mum_cca_rsbb, rm.replicated.uniques = TRUE)
 
+## Take a few unique true observations, and make sure not fully-replicated in synthetic dataset (based on the 'replicated.uniques' command from the 'synthpop' package)
+
+# Make a dataset just of unique individuals using the observed data (as if two or more participants share exactly the same data, then it's impossible to link back to a unique individual)
+sum(!(duplicated(data_mum_cca_rsbb) | duplicated(data_mum_cca_rsbb, fromLast = TRUE)))
+dat_unique <- data_mum_cca_rsbb[!(duplicated(data_mum_cca_rsbb) | 
+                                      duplicated(data_mum_cca_rsbb, fromLast = TRUE)), ]
+
+# Make a dataset just of unique individuals from the synthetic dataset
+sum(!(duplicated(data_mum_cca_rsbb_syn$syn) | duplicated(data_mum_cca_rsbb_syn$syn, fromLast = TRUE)))
+syn_unique <- data_mum_cca_rsbb_syn$syn[!(duplicated(data_mum_cca_rsbb_syn$syn) | 
+                                              duplicated(data_mum_cca_rsbb_syn$syn, fromLast = TRUE)), ]
+
+# Select a random row from the observed data
+(row_unique <- dat_unique[sample(nrow(dat_unique), 1), ])
+
+# Combine observed row with the synthetic data, and see if any duplicates
+sum(duplicated(rbind.data.frame(syn_unique, row_unique)))
+
+# Repeat for a few more rows of observed data
+(row_unique <- dat_unique[sample(nrow(dat_unique), 10), ])
+sum(duplicated(rbind.data.frame(syn_unique, row_unique)))
+
 # Explore this synthetic dataset
 data_mum_cca_rsbb_syn
 summary(data_mum_cca_rsbb_syn)
@@ -463,6 +528,28 @@ data_partner_cca_rsbb_syn <- syn(data_partner_cca_rsbb, seed = 127862)
 # Use the 'sdc' command (statistical disclosure control) to identify and remove any cases that are unique in both synthetic and observed data (i.e., cases which may be disclosive) - Here, are no unique replicates
 replicated.uniques(data_partner_cca_rsbb_syn, data_partner_cca_rsbb)
 data_partner_cca_rsbb_syn <- sdc(data_partner_cca_rsbb_syn, data_partner_cca_rsbb, rm.replicated.uniques = TRUE)
+
+## Take a few unique true observations, and make sure not fully-replicated in synthetic dataset (based on the 'replicated.uniques' command from the 'synthpop' package)
+
+# Make a dataset just of unique individuals using the observed data (as if two or more participants share exactly the same data, then it's impossible to link back to a unique individual)
+sum(!(duplicated(data_partner_cca_rsbb) | duplicated(data_partner_cca_rsbb, fromLast = TRUE)))
+dat_unique <- data_partner_cca_rsbb[!(duplicated(data_partner_cca_rsbb) | 
+                                    duplicated(data_partner_cca_rsbb, fromLast = TRUE)), ]
+
+# Make a dataset just of unique individuals from the synthetic dataset
+sum(!(duplicated(data_partner_cca_rsbb_syn$syn) | duplicated(data_partner_cca_rsbb_syn$syn, fromLast = TRUE)))
+syn_unique <- data_partner_cca_rsbb_syn$syn[!(duplicated(data_partner_cca_rsbb_syn$syn) | 
+                                            duplicated(data_partner_cca_rsbb_syn$syn, fromLast = TRUE)), ]
+
+# Select a random row from the observed data
+(row_unique <- dat_unique[sample(nrow(dat_unique), 1), ])
+
+# Combine observed row with the synthetic data, and see if any duplicates
+sum(duplicated(rbind.data.frame(syn_unique, row_unique)))
+
+# Repeat for a few more rows of observed data
+(row_unique <- dat_unique[sample(nrow(dat_unique), 10), ])
+sum(duplicated(rbind.data.frame(syn_unique, row_unique)))
 
 # Explore this synthetic dataset
 data_partner_cca_rsbb_syn
